@@ -240,6 +240,8 @@ export default class GetMoreRecord extends Component {
             workflowBatchGetDataLimitCount,
             workflowSubProcessDataLimitCount,
           )}
+          {data.actionId === ACTION_ID.FROM_RECORD &&
+            _l('注：此方式最多获取1000条关联记录，如果需要获取更多数据，请使用“从工作表获取记录”的方式。')}
         </div>
 
         {(!data.actionId ||

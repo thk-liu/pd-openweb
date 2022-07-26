@@ -66,6 +66,7 @@ function Sheet(props) {
     activeViewStatus,
     isCharge,
     updateGroupFilter,
+    config = {},
     navGroupFilters = [],
     chartId,
     showControlIds,
@@ -82,7 +83,7 @@ function Sheet(props) {
   );
   let { viewId } = props;
   const { loadWorksheet } = props;
-  const view = _.find(views, { viewId }) || (!viewId && views[0]) || {};
+  const view = _.find(views, { viewId }) || (!viewId && !chartId && views[0]) || {};
   const hasGroupFilter =
     !_.isEmpty(view.navGroup) && view.navGroup.length > 0 && _.includes([sheet, gallery], String(view.viewType));
   const basePara = {
@@ -114,7 +115,7 @@ function Sheet(props) {
   }, [view.viewId, worksheetId]);
 
   return (
-    <SheetContext.Provider base={basePara}>
+    <SheetContext.Provider base={basePara} value={{ config }}>
       <Con className="worksheetSheet">
         {type === 'common' && worksheetInfo.name && (
           <DocumentTitle
